@@ -1,0 +1,19 @@
+:host {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+nav {
+  width: 100%;
+  
+  a:first-of-type {
+    float: left;
+  }
+  
+  a:last-of-type {
+    float: right;
+  }
+}
