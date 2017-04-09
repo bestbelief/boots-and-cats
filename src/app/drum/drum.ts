@@ -1,40 +1,44 @@
 import { Component, Input, HostBinding, OnInit } from '@angular/core';
 import { AudioPlayer } from '../audio/audioPlayer';
+import { Recorder } from '../audio/recorder';
 
 @Component({
-    selector: 'key',
-    templateUrl: './key.html',
-    styleUrls: ['./key.scss'],
+    selector: 'drum',
+    templateUrl: './drum.html',
+    styleUrls: ['./drum.scss'],
     host: {
         '(document:keydown)': 'keypress($event)',
         '(document:keyup)': 'release($event)',
-        '(click)': 'click()'
+        '(click)': 'click()',
+        '[class.someClass]':'someField'
     }
 })
-export class KeyComponent implements OnInit {
-    @Input() tone: string;
+export class DrumComponent implements OnInit {
+    @Input() type: string;
     @Input() key: string;
     @Input() name: string;
-    @HostBinding('class.black') @Input() black: boolean = false; 
+    @HostBinding('class') @Input() styles = 'symbol';
     @HostBinding('class.pressed') pressed: boolean = false;
     private context: AudioContext;
-    private toneAudio: AudioBuffer;
+    private sound: AudioBuffer;
     private loaded: boolean = false;
+
     
-    constructor(private audioService: AudioPlayer) {}
+    constructor(private audioService: AudioPlayer,
+                private recorder: Recorder) {}
 
     ngOnInit() {
-        this.loadTone()
+        this.loadSound()
         if (!this.name) {
             this.name = this.key;
         }
     }
 
-    loadTone() {
-        this.audioService.loadSound('/assets/audio/piano/'+this.tone+'.ogg')
+    loadSound() {
+        this.audioService.loadSound('/assets/audio/drums/'+this.type+'.ogg')
             .then((buffer) => {
-                this.toneAudio = buffer;
                 this.loaded = true;
+                this.sound = buffer;
             });
     }
 
@@ -47,6 +51,7 @@ export class KeyComponent implements OnInit {
     }
 
     keypress(event: KeyboardEvent) {
+
         if (this.getKeyName(event) === this.key.toLowerCase() &&
             event.repeat !== true) {
             this.playTone();
@@ -61,8 +66,12 @@ export class KeyComponent implements OnInit {
     playTone() {
         if (!this.loaded) return;
 
+        if (this.recorder.isRecording) {
+            this.recorder.addSound(this.sound);
+        }
+
         this.setPressed(true);
-        this.audioService.playSound(this.toneAudio);
+        this.audioService.playSound(this.sound);
     }
 
     release(event: KeyboardEvent) {

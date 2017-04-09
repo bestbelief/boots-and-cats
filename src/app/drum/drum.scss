@@ -1,0 +1,100 @@
+:host {
+  position: absolute;
+  display: inline-block;
+  
+  .drum-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+
+  &.symbol {
+    background: radial-gradient(ellipse at center, #f9db8e 0%, #dfa855 12%, #e1911a 14%, #f7b776 100%);
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, .5);
+    
+    
+    &.pressed {
+      background: radial-gradient(ellipse at center, #c5ab69 0%, #9e7639 12%, #a16d1f 14%, #ba8958 100%);
+      box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, .25);
+    }
+  }
+  
+  &.tom {
+    background: radial-gradient(ellipse at center, #f5f9f0 0%,#eaeaea 43%,#cecece 72%,#b7b7b7 100%);
+    width: 100px;
+    height: 100px;
+    border-radius: 100%; 
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, .5);
+    
+    &.pressed {
+      background: radial-gradient(ellipse at center, #dce2d5 0%,#cecece 43%,#a7a7a7 72%,#aaaaaa 100%);
+      box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, .25);
+    }
+  }
+  
+  &.drum {
+    background: linear-gradient(to right, #c29660 0%, #f7eecd 60.6%, #bf9c54 100%);
+    width: 120px;
+    height: 110px;
+    border-radius: 2px;
+    box-shadow: 0px 3px 8px 0px rgba(0, 0, 0, .5);
+
+    &.pressed {
+      background: linear-gradient(to right, #a37d4d 0%, #cfc7a9 60.6%, #ac8c4b 100%);
+      box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, .25);
+    }
+  }
+  
+  
+  &[type="Snare"] {
+    top: 130px;
+    left: 70px;
+  }
+  
+  &[type="Bass-drum"] {
+    top: 30px;
+    left: 190px;
+  }
+  
+  &[type="Floor-tom"] {
+    top: 130px;
+    left: 340px;
+  }
+  
+  &[type="Low-tom"] {
+    width: 80px;
+    height: 80px;
+    top: 70px;
+    left: 260px;
+  }
+  
+  &[type="High-hat-open"] {
+    top: 80px;
+    left: 20px;
+  }
+  
+  &[type="High-hat-closed"] {
+    top: 60px;
+    left: 10px;
+  }
+  
+  &[type="Ride-cymbol"] {
+    width: 110px;
+    height: 110px;
+    top: 10px;
+    left: 120px;
+  }
+  
+  &[type="Crash-symbol"] {
+    width: 120px;
+    height: 120px;
+    top: 25px;
+    left: 320px;
+  }
+}
